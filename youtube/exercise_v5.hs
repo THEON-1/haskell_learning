@@ -33,8 +33,10 @@ hasPath [(x, y)] a b = a == x && b == y
 hasPath xs a b =
     let l2 = [t | t <- xs , fst t == a]
     in or [ (snd v) == b || (hasPath [u | u <- xs, u /= v] (snd v) b) | v <- l2]
--- hasPath xs x y
---  | x == y = True
---  | otherwise =
---   let xs' = [(n, m) | (n, m) <- xs, n /= x] in
---   or [hasPath xs' m y | (n, m) <- xs, n == x]
+{-
+hasPath xs x y
+    | x == y = True
+    | otherwise =
+        let xs' = [(n, m) | (n, m) <- xs, n /= x] in 
+            or [hasPath xs' m y | (n, m) <- xs, n == x]
+--}
