@@ -1,4 +1,5 @@
 import Data.List hiding (insert)
+import Test.QuickCheck
 
 data Tree a = Leaf | Node (Tree a) a (Tree a)
     deriving Show
@@ -29,4 +30,11 @@ inorder tree = aux tree [] where
 testtree :: Tree Integer
 testtree = insert 1 $ insert 3 $ insert 6 $ insert 2 $ insert 5 $ insert 4 Leaf
 
-treeIsSortedProp = 
+treeIsSortedProp :: [Int] -> Bool
+treeIsSortedProp xs = isSorted $ inorder $ insertAll xs where
+    insertAll [] = Leaf
+    insertAll [x] = insert x Leaf
+    insertAll (x:xs) = insert x $ insertAll xs
+    isSorted [] = True
+    isSorted [_] = True
+    isSorted (x:y:xs) = x <= y && isSorted (y:xs)
