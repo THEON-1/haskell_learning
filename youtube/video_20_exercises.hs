@@ -18,20 +18,22 @@ cut i (Node l n r) = Node (cut (i-1) l) n (cut (i-1) r)
 insert :: (Ord a) => a -> Tree a -> Tree a
 insert v Leaf = Node Leaf v Leaf
 insert v (Node l n r)
-    | v < n = Node (insert v l) n r
+    | v <= n = Node (insert v l) n r
     | v > n = Node l n (insert v r)
-    | otherwise = Node l n r
 
 inorder :: Tree a -> [a]
 inorder tree = aux tree [] where
     aux Leaf xs = xs
     aux (Node l n r) xs = aux l (n:aux r xs)
+--inorder Leaf  = []
+--inorder (Node l n r) = (inorder l) ++ [v] ++ (inorder r)
 
 testtree :: Tree Integer
 testtree = insert 1 $ insert 3 $ insert 6 $ insert 2 $ insert 5 $ insert 4 Leaf
 
 treeIsSortedProp :: [Int] -> Bool
 treeIsSortedProp xs = isSorted $ inorder $ insertAll xs where
+-- treeIsSortedProp xs = isSorted $ inorder $ foldr insert Leaf xs where
     insertAll [] = Leaf
     insertAll [x] = insert x Leaf
     insertAll (x:xs) = insert x $ insertAll xs
