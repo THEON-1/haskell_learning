@@ -2,7 +2,7 @@
 -- Records
 data Person = Person Sring Int
 
-data Persin = Person {
+data Person = Person {
     name :: String,
     age :: Int
 }

@@ -1,0 +1,9 @@
+
+data Color = RGB (Int, Int, Int)
+
+type Palette = [Color]
+
+type Color = (Int, Int, Int)
+
+
+newtype Name = Name String
