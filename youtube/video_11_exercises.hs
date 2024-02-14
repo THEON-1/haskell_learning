@@ -1,3 +1,8 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Avoid lambda" #-}
+{-# HLINT ignore "Use sum" #-}
+{-# HLINT ignore "Redundant bracket" #-}
+{-# HLINT ignore "Use product" #-}
 
 -- ex 1
 rev :: [a] -> [a]
