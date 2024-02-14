@@ -1,7 +1,11 @@
 
-class Nested a
-instance (Nested a) => Nested [a]
+newtype Nested = Nested {
+    contains :: [Nested]
+    }
 
-int2set :: (Eq t, Num t) => t -> Nested Int
-int2set 0 = []
---int2set n = [int2set (n-1), [int2set (n-1)]]
+instance Show Nested where
+    show :: Nested -> String
+    show (Nested n) = show n
+
+intSet :: [Nested]
+intSet = Nested []:map (\x -> Nested (x : contains x)) intSet
